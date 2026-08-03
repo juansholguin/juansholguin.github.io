@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Juan S. Holguin | Economist</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── RESET & BASE ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:   #ffffff;
+      --paper:   #f4f1ea;
+      --ink:     #1a1710;
+      --muted:   #6b6455;
+      --rule:    #d9d4c8;
+      --accent:  #7a4f2d;
+      --link:    #3a5c7a;
+      --nav-h:   64px;
+      --max-w:   760px;
+      --serif:   'EB Garamond', Georgia, serif;
+      --display: 'Cormorant Garamond', Georgia, serif;
+      --sans:    'Jost', system-ui, sans-serif;
+    }
+
+    html { font-size: 18px; scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--serif);
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAV ──────────────────────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--cream);
+      border-bottom: 1px solid var(--rule);
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+    }
+
+    .nav-brand {
+      font-family: var(--display);
+      font-size: 1.15rem;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--ink);
+      border-bottom-color: var(--ink);
+    }
+
+    /* Hamburger */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--ink);
+      transition: all 0.3s;
+    }
+
+    /* Mobile nav */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: var(--nav-h);
+      left: 0; right: 0; bottom: 0;
+      background: var(--cream);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+      z-index: 99;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--display);
+      font-size: 2rem;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+    }
+
+    /* ─── LAYOUT ───────────────────────────────────────────────────── */
+    main {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 4.5rem 2rem 6rem;
+    }
+
+    section { margin-bottom: 4.5rem; }
+
+    /* ─── HERO / ABOUT ─────────────────────────────────────────────── */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 200px;
+      gap: 3rem;
+      align-items: start;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .hero-text h1 {
+      font-family: var(--display);
+      font-size: 2.6rem;
+      font-weight: 300;
+      letter-spacing: 0.01em;
+      line-height: 1.15;
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-text p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #2e2b24;
+      margin-bottom: 1rem;
+    }
+
+    .hero-text .contact {
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      margin-top: 1.4rem;
+    }
+
+    .hero-text .contact a {
+      color: var(--link);
+      text-decoration: none;
+      border-bottom: 1px solid var(--rule);
+      transition: border-color 0.2s;
+    }
+    .hero-text .contact a:hover { border-color: var(--link); }
+
+    .hero-photo {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: top center;
+      filter: grayscale(10%);
+      border: 1px solid var(--rule);
+    }
+
+    /* Photo placeholder */
+    .photo-placeholder {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 0.5rem;
+      color: var(--muted);
+    }
+    .photo-placeholder svg { opacity: 0.35; }
+    .photo-placeholder span {
+      font-family: var(--sans);
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ─── SECTION HEADERS ──────────────────────────────────────────── */
+    .section-label {
+      font-family: var(--sans);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.8rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      display: block;
+    }
+
+    .subsection-label {
+      font-family: var(--sans);
+      font-size: 0.63rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 2.2rem 0 1.2rem;
+    }
+
+    /* ─── PAPER ENTRIES ────────────────────────────────────────────── */
+    .paper-list { list-style: none; }
+
+    .paper-entry {
+      padding: 1.4rem 0;
+      border-bottom: 1px solid var(--rule);
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .paper-entry.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .paper-entry:first-child { padding-top: 0; }
+
+    .paper-title {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--ink);
+      text-decoration: none;
+      display: inline;
+      background-image: linear-gradient(var(--ink), var(--ink));
+      background-size: 0 1px;
+      background-position: 0 100%;
+      background-repeat: no-repeat;
+      transition: background-size 0.3s ease;
+    }
+    .paper-title:hover { background-size: 100% 1px; }
+
+    .paper-coauthors {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-top: 0.25rem;
+      font-style: italic;
+    }
+    .paper-coauthors a {
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--rule);
+    }
+    .paper-coauthors a:hover { color: var(--ink); border-color: var(--ink); }
+
+    .paper-status {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+      color: var(--accent);
+      margin-top: 0.3rem;
+    }
+
+    .paper-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .paper-link {
+      font-family: var(--sans);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--link);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s, color 0.2s;
+      padding-bottom: 1px;
+    }
+    .paper-link:hover { border-color: var(--link); }
+
+    /* ─── TEACHING ─────────────────────────────────────────────────── */
+    .teaching-block { margin-bottom: 2rem; }
+
+    .teaching-block h3 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 1rem;
+      margin-bottom: 0.2rem;
+    }
+    .teaching-block .course-meta {
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.03em;
+    }
+    .teaching-block .course-meta a {
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--rule);
+    }
+    .teaching-block .course-meta a:hover { color: var(--ink); border-color: var(--muted); }
+
+    .award-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--sans);
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid currentColor;
+      padding: 0.25rem 0.65rem;
+      margin-bottom: 1.6rem;
+      text-decoration: none;
+    }
+    .award-badge:hover { background: var(--accent); color: white; }
+
+    /* ─── FOOTER ───────────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 2rem 2.5rem;
+      text-align: center;
+      font-family: var(--sans);
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ─── ANIMATIONS ───────────────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero { animation: fadeUp 0.7s ease both; }
+    .hero-text h1 { animation: fadeUp 0.7s 0.05s ease both; }
+    .hero-text p  { animation: fadeUp 0.7s 0.12s ease both; }
+    .hero-text .contact { animation: fadeUp 0.7s 0.2s ease both; }
+
+    /* ─── RESPONSIVE ───────────────────────────────────────────────── */
+    @media (max-width: 640px) {
+      :root { --nav-h: 56px; }
+      nav { padding: 0 1.2rem; }
+
+      .nav-links { display: none; }
+      .nav-toggle { display: flex; }
+
+      main { padding: 2.5rem 1.2rem 4rem; }
+
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .hero-photo,
+      .photo-placeholder {
+        width: 140px;
+        aspect-ratio: 3/4;
+        order: -1;
+      }
+
+      .hero-text h1 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ────────────────────────────────────────────────────── -->
+  <nav>
+    <a href="#" class="nav-brand">Juan S. Holguin</a>
+
+    <ul class="nav-links">
+      <li><a href="#about"    class="active">Home</a></li>
+      <li><a href="#research">Research</a></li>
+    </ul>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about"    onclick="closeMobile()">Home</a>
+    <a href="#research" onclick="closeMobile()">Research</a>
+  </div>
+
+  <!-- ── MAIN ───────────────────────────────────────────────────── -->
+  <main>
+
+    <!-- ABOUT / HERO -->
+    <section id="about">
+      <div class="hero">
+        <div class="hero-text">
+          <h1>Juan S. Holguin</h1>
+
+          <p>
+            I am an economist interested in Industrial Organization and Economic Policy.
+            I am a PhD Candidate at the
+            Department of Economics, University of Western Ontario.
+          </p>
+
+          <p>
+            My research focuses on understanding how market structure shapes the effects of economic policies.
+          </p>
+
+          <div class="contact">
+            You can find my CV <a href="cv.pdf">here</a>.
+            &nbsp;&middot;&nbsp;
+            Email: <a href="mailto:jholguin@uwo.ca">jholguin[at]uwo.ca</a>
+          </div>
+        </div>
+
+    <img
+  class="hero-photo"
+  src="foto.jpg"
+  alt="Juan S. Holguin"
+/>
+    </section>
+
+    <!-- RESEARCH -->
+    <section id="research">
+      <p class="section-label">Research</p>
+
+      <!-- Working Papers -->
+      <p class="subsection-label">Working Papers &amp; Work in Progress</p>
+
+      <ul class="paper-list">
+
+        <li class="paper-entry">
+          <a class="paper-title" href="#">
+            Labor-Material Complementarity and the Propagation of Competitive Shocks
+          </a>
+          <div class="paper-status">Job Market Paper</div>
+         </div>
+        </li>
+
+        <li class="paper-entry">
+          <a class="paper-title">
+            Markups Accounting
+          </a>
+          <div class="paper-coauthors">
+            Joint work with
+            <a href="https://sites.google.com/site/sergiocampod/home">Sergio Ocampo</a>
+            and
+            <a href="https://sergiosalgado.net/">Sergio Salgado</a>
+          </div>
+          <div class="paper-links">
+            <a class="paper-link" href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7149478">View PDF</a>
+          </div>
+        </li>
+
+        <li class="paper-entry">
+          <a class="paper-title">
+            Efficiency Effects of Tax Reform in India and the Interaction with Vertical Integration Decisions
+          </a>
+          <div class="paper-coauthors">
+          </div>
+          <div class="paper-links">
+            <a class="paper-link" href="Summer_Paper_Juan_Holguin.pdf">View PDF</a>
+          </div>
+        </li>
+
+        <li class="paper-entry">
+          <a class="paper-title" href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4880671">
+            When Are Innovation Support Programs Effective? Examples from Chile and Colombia
+          </a>
+          <div class="paper-coauthors">
+            Joint work with  Ekaterina Vostrknutova</a>
+            and
+            Pluvia Zuniga</a>
+
+          </div>
+        </li>
+
+      </ul>
+
+      <!-- Pre-PhD Publications -->
+      <p class="subsection-label" style="margin-top:3rem;">Pre-PhD Publications</p>
+
+      <ul class="paper-list">
+        <li class="paper-entry">
+          <a class="paper-title" href="#">
+The credit supply channel of monetary policy: evidence from a FAVAR model with sign restrictions</a>
+          <div class="paper-coauthors">
+            Joint work with <a href="https://sites.google.com/view/jorgemuribe/home">Jorge M. Uribe</a>
+          </div>
+          <div class="paper-status"><em>Empirical Economics</em>, 2020</div>
+          <div class="paper-links">
+            <a class="paper-link" href="https://link.springer.com/article/10.1007/s00181-019-01759-5">Published Version</a>
+            <a class="paper-link" href="https://openaccess.uoc.edu/server/api/core/bitstreams/80dfdca1-985d-46f1-80a3-7a06cf5a4fb3/content">Working Paper</a>
+
+        <li class="paper-entry">
+          <a class="paper-title" href="#">
+Reduction of chronic malnutrition for infants in Bogotá, Colombia</a>
+          <div class="paper-coauthors">
+            Joint work with Paula Prieto</a>
+and
+             Kenny Trujillo</a>
+and
+             Sergio Moreno</a>
+
+and
+             Diana Pineda</a>
+and
+             Simon Tomasi</a>
+
+and
+             Andrea Ramirez</a>
+
+
+          </div>
+          <div class="paper-status"><em>BMC Public Health</em>, 2021</div>
+          <div class="paper-links">
+            <a class="paper-link" href="https://pubmed.ncbi.nlm.nih.gov/33832452/">Published Version</a>
+            <a class="paper-link" href="https://europepmc.org/api/fulltextRepo?fileName=12889_2021_Article_10620.pdf&mimeType=application%2Fpdf&pdfKey=1iP2uoMbagZZy-pOgmn1lPEJ2_m3kfS5C49Tj6vKVRopCijnRTLvJJ8&pmcId=PMC8034142&pmc_domain=bmcph&pmc_pageType=pdf&type=FILE&version=1">Working Paper</a>
+
+
+          </div>
+        </li>
+      </ul>
+
+   </main>
+
+  <!-- ── FOOTER ─────────────────────────────────────────────────── -->
+  <footer>
+    <p>Juan S. Holguin &nbsp;&middot;&nbsp; <a href="mailto:jholguin@uwo.ca" style="color:inherit;text-decoration:none;">jholguin@uwo.ca</a> &nbsp;&middot;&nbsp; &copy; 2026</p>
+  </footer>
+
+  <!-- ── SCRIPTS ─────────────────────────────────────────────────── -->
+  <script>
+    /* ── Mobile menu toggle ──────────────────────────────────────── */
+    const toggle = document.getElementById('navToggle');
+    const menu   = document.getElementById('mobileMenu');
+    let open = false;
+
+    toggle.addEventListener('click', () => {
+      open = !open;
+      menu.classList.toggle('open', open);
+      const bars = toggle.querySelectorAll('span');
+      if (open) {
+        bars[0].style.transform = 'rotate(45deg) translate(4.5px, 4.5px)';
+        bars[1].style.opacity   = '0';
+        bars[2].style.transform = 'rotate(-45deg) translate(4.5px, -4.5px)';
+      } else {
+        bars.forEach(b => { b.style.transform = ''; b.style.opacity = ''; });
+      }
+    });
+
+    function closeMobile() {
+      open = false;
+      menu.classList.remove('open');
+      const bars = toggle.querySelectorAll('span');
+      bars.forEach(b => { b.style.transform = ''; b.style.opacity = ''; });
+    }
+
+    /* ── Scroll-reveal for paper entries ─────────────────────────── */
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      }),
+      { threshold: 0.15 }
+    );
+
+    document.querySelectorAll('.paper-entry').forEach((el, i) => {
+      el.style.transitionDelay = `${i * 60}ms`;
+      observer.observe(el);
+    });
+
+    /* ── Active nav link on scroll ───────────────────────────────── */
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks  = document.querySelectorAll('.nav-links a');
+
+    const navObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            navLinks.forEach(a => a.classList.remove('active'));
+            const link = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+            if (link) link.classList.add('active');
+          }
+        });
+      },
+      { rootMargin: '-40% 0px -50% 0px' }
+    );
+
+    sections.forEach(s => navObserver.observe(s));
+  </script>
+
+</body>
+</html>
