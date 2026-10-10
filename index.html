@@ -1,7 +1,8 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0">
 
@@ -14,67 +15,579 @@
 
   <link rel="canonical"
         href="https://juansholguin.github.io/">
-  <meta name="google-site-verification" content="XiD8g4H256-AkIojKRH0I9wYXShkhP4IVLSoKNWUry4" />
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Juan S. Holguin </title>
+
+  <meta name="google-site-verification"
+        content="XiD8g4H256-AkIojKRH0I9wYXShkhP4IVLSoKNWUry4" />
+
   <link rel="icon" type="image/png" href="tns.jpg">
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
-/* ─── COLLAPSIBLE PAPER ABSTRACT ───────────────────────── */
 
-.paper-abstract {
-  margin-top: 0.9rem;
-}
-
-.paper-abstract summary {
-  font-family: var(--sans);
-  font-size: 0.68rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--link);
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  list-style: none;
-}
-
-.paper-abstract summary::-webkit-details-marker {
-  display: none;
-}
-
-.paper-abstract summary::after {
-  content: "+";
-  font-size: 1rem;
-  font-weight: 300;
-}
-
-.paper-abstract[open] summary::after {
-  content: "−";
-}
-
-.paper-abstract summary:hover {
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-.abstract-content {
-  margin-top: 0.9rem;
-  padding-left: 1rem;
-  border-left: 2px solid var(--rule);
-}
-
-.abstract-content p {
-  font-family: var(--serif);
-  font-size: 0.92rem;
-  line-height: 1.75;
-  color: var(--ink);
-  text-align: justify;
-}
   <style>
+
+    /* ─── RESET & BASE ─────────────────────────────────────────────── */
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --cream:   #ffffff;
+      --paper:   #f4f1ea;
+      --ink:     #1a1710;
+      --muted:   #6b6455;
+      --rule:    #d9d4c8;
+      --accent:  #7a4f2d;
+      --link:    #3a5c7a;
+      --nav-h:   64px;
+      --max-w:   760px;
+      --serif:   'EB Garamond', Georgia, serif;
+      --display: 'Cormorant Garamond', Georgia, serif;
+      --sans:    'Jost', system-ui, sans-serif;
+    }
+
+    html {
+      font-size: 18px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--serif);
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+
+    /* ─── NAV ──────────────────────────────────────────────────────── */
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--cream);
+      border-bottom: 1px solid var(--rule);
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+    }
+
+    .nav-brand {
+      font-family: var(--display);
+      font-size: 1.15rem;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--ink);
+      border-bottom-color: var(--ink);
+    }
+
+
+    /* ─── HAMBURGER MENU ───────────────────────────────────────────── */
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--ink);
+      transition: all 0.3s;
+    }
+
+
+    /* ─── MOBILE NAV ───────────────────────────────────────────────── */
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: var(--nav-h);
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--cream);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+      z-index: 99;
+    }
+
+    .mobile-menu.open {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      font-family: var(--display);
+      font-size: 2rem;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+    }
+
+
+    /* ─── LAYOUT ───────────────────────────────────────────────────── */
+
+    main {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 4.5rem 2rem 6rem;
+    }
+
+    section {
+      margin-bottom: 4.5rem;
+    }
+
+
+    /* ─── HERO / ABOUT ─────────────────────────────────────────────── */
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 200px;
+      gap: 3rem;
+      align-items: start;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .hero-text h1 {
+      font-family: var(--display);
+      font-size: 2.6rem;
+      font-weight: 300;
+      letter-spacing: 0.01em;
+      line-height: 1.15;
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-text p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #2e2b24;
+      margin-bottom: 1rem;
+    }
+
+    .hero-text .contact {
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      margin-top: 1.4rem;
+    }
+
+    .hero-text .contact a {
+      color: var(--link);
+      text-decoration: none;
+      border-bottom: 1px solid var(--rule);
+      transition: border-color 0.2s;
+    }
+
+    .hero-text .contact a:hover {
+      border-color: var(--link);
+    }
+
+    .hero-photo {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: top center;
+      filter: grayscale(10%);
+      border: 1px solid var(--rule);
+    }
+
+
+    /* ─── PHOTO PLACEHOLDER ────────────────────────────────────────── */
+
+    .photo-placeholder {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 0.5rem;
+      color: var(--muted);
+    }
+
+    .photo-placeholder svg {
+      opacity: 0.35;
+    }
+
+    .photo-placeholder span {
+      font-family: var(--sans);
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+
+    /* ─── SECTION HEADERS ──────────────────────────────────────────── */
+
+    .section-label {
+      font-family: var(--sans);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.8rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      display: block;
+    }
+
+    .subsection-label {
+      font-family: var(--sans);
+      font-size: 0.63rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 2.2rem 0 1.2rem;
+    }
+
+
+    /* ─── PAPER ENTRIES ────────────────────────────────────────────── */
+
+    .paper-list {
+      list-style: none;
+    }
+
+    .paper-entry {
+      padding: 1.4rem 0;
+      border-bottom: 1px solid var(--rule);
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .paper-entry.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .paper-entry:first-child {
+      padding-top: 0;
+    }
+
+    .paper-title {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--ink);
+      text-decoration: none;
+      display: inline;
+      background-image: linear-gradient(var(--ink), var(--ink));
+      background-size: 0 1px;
+      background-position: 0 100%;
+      background-repeat: no-repeat;
+      transition: background-size 0.3s ease;
+    }
+
+    .paper-title:hover {
+      background-size: 100% 1px;
+    }
+
+    .paper-coauthors {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-top: 0.25rem;
+      font-style: italic;
+    }
+
+    .paper-coauthors a {
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .paper-coauthors a:hover {
+      color: var(--ink);
+      border-color: var(--ink);
+    }
+
+    .paper-status {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+      color: var(--accent);
+      margin-top: 0.3rem;
+    }
+
+    .paper-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .paper-link {
+      font-family: var(--sans);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--link);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s, color 0.2s;
+      padding-bottom: 1px;
+    }
+
+    .paper-link:hover {
+      border-color: var(--link);
+    }
+
+
+    /* ─── COLLAPSIBLE ABSTRACT ─────────────────────────────────────── */
+
+    .paper-abstract {
+      margin-top: 0.9rem;
+    }
+
+    .paper-abstract summary {
+      font-family: var(--sans);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--link);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      list-style: none;
+    }
+
+    .paper-abstract summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .paper-abstract summary::after {
+      content: "+";
+      font-size: 1rem;
+      font-weight: 300;
+    }
+
+    .paper-abstract[open] summary::after {
+      content: "−";
+    }
+
+    .paper-abstract summary:hover {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .paper-abstract summary:focus-visible {
+      outline: 2px solid var(--link);
+      outline-offset: 4px;
+    }
+
+    .abstract-content {
+      margin-top: 0.9rem;
+      padding-left: 1rem;
+      border-left: 2px solid var(--rule);
+    }
+
+    .abstract-content p {
+      font-family: var(--serif);
+      font-size: 0.92rem;
+      line-height: 1.75;
+      color: var(--ink);
+      text-align: justify;
+    }
+
+
+    /* ─── TEACHING ─────────────────────────────────────────────────── */
+
+    .teaching-block {
+      margin-bottom: 2rem;
+    }
+
+    .teaching-block h3 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 1rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .teaching-block .course-meta {
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.03em;
+    }
+
+    .teaching-block .course-meta a {
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .teaching-block .course-meta a:hover {
+      color: var(--ink);
+      border-color: var(--muted);
+    }
+
+    .award-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--sans);
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid currentColor;
+      padding: 0.25rem 0.65rem;
+      margin-bottom: 1.6rem;
+      text-decoration: none;
+    }
+
+    .award-badge:hover {
+      background: var(--accent);
+      color: white;
+    }
+
+
+    /* ─── FOOTER ───────────────────────────────────────────────────── */
+
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 2rem 2.5rem;
+      text-align: center;
+      font-family: var(--sans);
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+
+
+    /* ─── ANIMATIONS ───────────────────────────────────────────────── */
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero {
+      animation: fadeUp 0.7s ease both;
+    }
+
+    .hero-text h1 {
+      animation: fadeUp 0.7s 0.05s ease both;
+    }
+
+    .hero-text p {
+      animation: fadeUp 0.7s 0.12s ease both;
+    }
+
+    .hero-text .contact {
+      animation: fadeUp 0.7s 0.2s ease both;
+    }
+
+
+    /* ─── RESPONSIVE ───────────────────────────────────────────────── */
+
+    @media (max-width: 640px) {
+
+      :root {
+        --nav-h: 56px;
+      }
+
+      nav {
+        padding: 0 1.2rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+
+      main {
+        padding: 2.5rem 1.2rem 4rem;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .hero-photo,
+      .photo-placeholder {
+        width: 140px;
+        aspect-ratio: 3/4;
+        order: -1;
+      }
+
+      .hero-text h1 {
+        font-size: 2rem;
+      }
+
+      .abstract-content p {
+        text-align: left;
+      }
+
+    }
+
+  </style>
+
     /* ─── RESET & BASE ─────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
