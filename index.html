@@ -23,7 +23,57 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+/* ─── COLLAPSIBLE PAPER ABSTRACT ───────────────────────── */
 
+.paper-abstract {
+  margin-top: 0.9rem;
+}
+
+.paper-abstract summary {
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--link);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  list-style: none;
+}
+
+.paper-abstract summary::-webkit-details-marker {
+  display: none;
+}
+
+.paper-abstract summary::after {
+  content: "+";
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+.paper-abstract[open] summary::after {
+  content: "−";
+}
+
+.paper-abstract summary:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.abstract-content {
+  margin-top: 0.9rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--rule);
+}
+
+.abstract-content p {
+  font-family: var(--serif);
+  font-size: 0.92rem;
+  line-height: 1.75;
+  color: var(--ink);
+  text-align: justify;
+}
   <style>
     /* ─── RESET & BASE ─────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -474,16 +524,37 @@ My research examines how market structure shapes firms’ responses to economic 
 
       <ul class="paper-list">
 
-        <li class="paper-entry">
-          <a class="paper-title" href="#">
-            Labor-Material Complementarity and the Propagation of Competitive Shocks
-          </a>
-          <div class="paper-status">Job Market Paper</div>      
-        </a>
-        <a class="paper-link" href="JMP_Slides_JH.pdf" target="_blank" rel="noopener noreferrer">View Slides</a>
+       <li class="paper-entry">
 
-         </div>
-        </li>
+  <a class="paper-title" href="#">
+    Labor-Material Complementarity and the Propagation of Competitive Shocks
+  </a>
+
+  <div class="paper-status">Job Market Paper</div>
+
+  <div class="paper-links">
+    <a class="paper-link"
+       href="JMP_Slides_JH.pdf"
+       target="_blank"
+       rel="noopener noreferrer">
+       View Slides
+    </a>
+  </div>
+
+  <!-- Collapsible Abstract -->
+  <details class="paper-abstract">
+    <summary>Abstract</summary>
+
+    <div class="abstract-content">
+      <p>
+       I study how pro-competition industrial policies affect labor demand. Importantly, I distinguish between direct effects on targeted sectors, where prices and markups decline, and indirect effects that propagate through both input-output linkages and heterogeneous labor-material substitution elasticities. Input-output linkages determine where price reductions propagate, while the elasticity of substitution between labor and materials governs firms’ labor response to lower material prices. Labor demand is amplified when labor and materials are complements and reduced when substitutes. I quantify these channels in the context of a major pro-competition policy in India, which lifted entry restrictions in about 500 product-markets. I estimate a network model with oligopolistic competition, variable markups, and sectoral-level labor-materials elasticity of substitution. The labor-materials elasticity-of-substitution channel explains over one quarter of the aggregate labor gains from deregulation, more than the standard markup-compression channel. For every 100 jobs created in deregulated sectors, 53 survive and 47 are destroyed through reallocation. Without the labor–materials substitution channel, 60 would have been destroyed. Crucially, heterogeneity in labor-materials elasticity of substitution matters for sectoral policy evaluation: for every 100 jobs created in deregulated sectors, a common-elasticity model assigns about 25 to the wrong sectors. The key policy takeaway is that employment effects depend on which sectors buy the goods the reform makes cheaper. Counterfactual exercises show that reforms generating similar output gains differ substantially in job gains or losses depending on how they are targeted.
+
+      </p>
+    </div>
+
+  </details>
+
+</li>
 
         <li class="paper-entry">
           <a class="paper-title">
